@@ -1,0 +1,49 @@
+group 'com.bpcs.gradle'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'org.ajoberstar:grgit:1.7.0'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+
+}
+
+task sourceJar(type: Jar){
+    from sourceSets.main.allSource
+}
+
+task deleteProjectRepo(type: Delete) {
+    delete "$projectDir/../repo"
+}
+
+publishing {
+    repositories {
+        maven {
+            // change to point to local repo (for now)
+            url "$projectDir/../repo"
+        }
+    }
+    publications {
+        mavenJava(MavenPublication){
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+
+        }
+    }
+}
+
