@@ -9,7 +9,7 @@ import org.gradle.api.tasks.TaskAction
  */
 class CloneTask extends DefaultTask
 {
-    static final String NAME = "status"
+    static final String NAME = "clone"
 
     @TaskAction
     void getStatus ()
@@ -17,9 +17,7 @@ class CloneTask extends DefaultTask
         if (project.gitprops.localGitRepo)
         {
             String localRepo = project.gitprops.localGitRepo
-            Grgit grgit = Grgit.open(dir: localRepo)
-            def status = grgit.status()
-            println status
+
         }
     }
 
