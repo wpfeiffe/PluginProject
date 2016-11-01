@@ -3,3 +3,5 @@
 repo/
 /GitPlugin/build/
 /GitPlugin/.gradle/
+/TestGitPlugin/build/
+/TestGitPlugin/.gradle/
